@@ -46,11 +46,11 @@ Event.import_events
 ## Starting the rails server
 
 * `bundle exec rails s` - This will start a rails server in the port 3000.
-* Open `http://localhost:3000/`
+* Open `http://localhost:3000`
 
 ## UI for listing events
 
-* Once you open `http://localhost:3000/`, you will see the list of events with a date filter.
+* Once you open `http://localhost:3000/events`, you will see the list of events with a date filter.
 
 ## Checking for availablity of users
 
