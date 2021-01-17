@@ -67,13 +67,7 @@ module Importers
           next unless user
 
           rspv_status = user_rspv_detail[:status]
-          if rspv_status == ::Attendant::Statuses::YES
-            existing_user_events(user.id).update_all(
-              status: ::Attendant::Statuses::NO,
-              notes: EVENT_REJECTION_NOTES,
-              updated_at: Time.zone.now
-            )
-          end
+          update_existing_user_marked_yes_events(user.id) if rspv_status == ::Attendant::Statuses::YES
           Attendant.create!(
             user_id: user.id,
             event_id: @event.id,
@@ -82,10 +76,14 @@ module Importers
         end
       end
 
-      def existing_user_events(user_id)
-        ::Attendant.where(
-          user_id: user_id,
-          status: ::Attendant::Statuses::YES
+      def update_existing_user_marked_yes_events(user_id)
+        user = User.find(user_id)
+        overlapping_events = user.overlapping_events(start_time, end_time)
+        attendant_ids = overlapping_events.pluck('attendants.id')
+        Attendant.where(id: attendant_ids).update_all(
+          status: ::Attendant::Statuses::NO,
+          notes: EVENT_REJECTION_NOTES,
+          updated_at: Time.zone.now
         )
       end
 
