@@ -24,6 +24,6 @@
 <br/><br/>
 <% if @user_availability_details %>
   <strong>
-    <%= @user_availability_details[:user_name] %> is <%= @user_availability_details[:status] %> between <%= Time.zone.parse(@user_availability_details[:start_time]).strftime("%d-%m-%Y_%H:%M") %> and <%= Time.zone.parse(@user_availability_details[:end_time]).strftime("%d-%m-%Y_%H:%M") %>
+    <%= @user_availability_details[:user_name] %> is <%= @user_availability_details[:status] %> between <%= Time.zone.parse(@user_availability_details[:start_time].to_s).strftime("%d-%m-%Y %H:%M") %> and <%= Time.zone.parse(@user_availability_details[:end_time].to_s).strftime("%d-%m-%Y %H:%M") %>
   </strong>
 <% end %>
