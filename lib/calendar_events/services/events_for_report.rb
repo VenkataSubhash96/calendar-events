@@ -11,18 +11,18 @@ module CalendarEvents
       end
 
       def fetch
-        Event.where('start_time >= ?', parsed_from_time)
+        Event.where('start_time >= ?', parsed_start_time)
              .where('end_time <= ?', parsed_end_time)
       end
 
       private
 
-      def parsed_from_time
-        @parsed_from_time ||= Time.zone.parse(start_time)
+      def parsed_start_time
+        @parsed_start_time ||= Time.zone.parse(start_time.to_s)
       end
 
       def parsed_end_time
-        @parsed_end_time ||= Time.zone.parse(end_time)
+        @parsed_end_time ||= Time.zone.parse(end_time.to_s)
       end
     end
   end
