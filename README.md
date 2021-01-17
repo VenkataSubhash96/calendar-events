@@ -10,7 +10,7 @@ Table of Contents
 * [Importing users and events](#importing-users-and-events)
 * [Starting the rails server](#starting-the-rails-server)
 * [UI for listing events](#ui-for-listing-events)
-* [Checking for availablity of users](#checking-for-availablity-of-users)
+* [Checking for availability of users](#checking-for-availability-of-users)
 
 
 
@@ -52,7 +52,7 @@ Event.import_events
 
 * Once you open `http://localhost:3000/events`, you will see the list of events with a date filter.
 
-## Checking for availablity of users
+## Checking for availability of users
 
 * For a given time range and for a given user_id, run the following inside rails console.
 ```
@@ -61,3 +61,5 @@ user.overlapping_events(from_time, to_time).empty?
 ```
 
 * If you do not mention to_time, then it will consider end_time as 2 hours from from_time.
+
+* From UI, open `http://localhost:3000/users/availability` and select a user and the time range and once you submit, you can see the user availability between the selected time range.

@@ -1,0 +1,29 @@
+<strong>
+  Users Availability
+</strong>
+<br /><br />
+
+<%= form_for :availability, url: availability_users_path, method: :get, html: {class: 'well form-search', :autocomplete => "off"} do |f| %>
+  <em>
+    Select User
+  </em>
+  <%= f.select :user_name, @users_to_select, {prompt: "Select a User"}, {class: "input-small", required: "required"} %>
+  <br /><br />
+  <em>
+    Start Date
+  </em>
+  <%= f.text_field :start_time, type: 'datetime-local', class: "datepicker", :autocomplete => "off"  %>
+  <br/><br/>
+  <em>
+    End Date
+  </em>
+  <%= f.text_field :end_time, type: 'datetime-local', class: "datepicker", :autocomplete => "off"  %>
+  <br/><br/>
+  <%= f.submit 'submit', class: 'btn' %>
+<%end%>
+<br/><br/>
+<% if @user_availability_details %>
+  <strong>
+    <%= @user_availability_details[:user_name] %> is <%= @user_availability_details[:status] %> between <%= Time.zone.parse(@user_availability_details[:start_time]).strftime("%d-%m-%Y_%H:%M") %> and <%= Time.zone.parse(@user_availability_details[:end_time]).strftime("%d-%m-%Y_%H:%M") %>
+  </strong>
+<% end %>
