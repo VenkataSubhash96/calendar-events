@@ -9,6 +9,8 @@ Table of Contents
 * [Setting up the database](#setting-up-the-database)
 * [Importing users and events](#importing-users-and-events)
 * [Starting the rails server](#starting-the-rails-server)
+* [UI for listing events](#ui-for-listing-events)
+* [Checking for availablity of users](#checking-for-availablity-of-users)
 
 
 
@@ -46,3 +48,16 @@ Event.import_events
 * `bundle exec rails s` - This will start a rails server in the port 3000.
 * Open `http://localhost:3000/`
 
+## UI for listing events
+
+* Once you open `http://localhost:3000/`, you will see the list of events with a date filter.
+
+## Checking for availablity of users
+
+* For a given time range and for a given user_id, run the following inside rails console.
+```
+user = User.find(user_id)
+user.overlapping_events(from_time, to_time).empty?
+```
+
+* If you do not mention to_time, then it will consider end_time as 2 hours from from_time.
