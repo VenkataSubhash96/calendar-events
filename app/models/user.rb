@@ -11,8 +11,8 @@ class User < ApplicationRecord
   end
 
   def overlapping_events(from_time, to_time = from_time + 2.hours)
-    parsed_from_time = Time.zone.parse(from_time)
-    parsed_end_time = Time.zone.parse(to_time)
+    parsed_from_time = Time.zone.parse(from_time.to_s)
+    parsed_end_time = Time.zone.parse(to_time.to_s)
     Event.joins(:attendants)
          .where(attendants: { status: ::Attendant::Statuses::YES, user_id: id })
          .where('events.start_time <= ? and events.end_time >= ?', parsed_end_time, parsed_from_time)
